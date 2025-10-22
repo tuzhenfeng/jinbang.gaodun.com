@@ -1,0 +1,258 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import AnimatedButton from '../components/ui/AnimatedButton';
+import EducationIllustration from '../components/illustrations/EducationIllustration';
+import { useTheme } from '../theme/ThemeProvider';
+
+const HomePage: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
+  
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-900 dark:to-gray-800 -z-10" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+          <motion.div 
+            className="flex flex-col md:flex-row items-center"
+            initial="hidden"
+            animate="show"
+            variants={container}
+          >
+            <motion.div 
+              className="w-full md:w-1/2 mb-10 md:mb-0 md:pr-10"
+              variants={item}
+            >
+              <motion.h1 
+                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-900 dark:text-white"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                智能高考志愿
+                <span className="block bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                  填报系统
+                </span>
+              </motion.h1>
+              
+              <motion.p 
+                className="text-lg text-gray-600 dark:text-gray-300 mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                基于大数据分析，为您提供精准的高考志愿填报建议，助您圆梦理想大学。
+              </motion.p>
+              
+              <motion.div 
+                className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                <AnimatedButton size="lg" className="w-full sm:w-auto">
+                  开始使用
+                </AnimatedButton>
+                <AnimatedButton 
+                  variant="outline" 
+                  size="lg" 
+                  className="w-full sm:w-auto"
+                >
+                  了解更多
+                </AnimatedButton>
+              </motion.div>
+              
+              <motion.div 
+                className="mt-8 flex flex-wrap gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-300 mr-2">
+                    ✓
+                  </div>
+                  智能推荐
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-300 mr-2">
+                    ✓
+                  </div>
+                  数据精准
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-300 mr-2">
+                    ✓
+                  </div>
+                  使用便捷
+                </div>
+              </motion.div>
+            </motion.div>
+            
+            <motion.div 
+              className="w-full md:w-1/2"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <div className="relative">
+                <div className="absolute -top-10 -left-10 w-64 h-64 bg-primary-200 dark:bg-primary-900 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+                <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-secondary-200 dark:bg-secondary-800 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+                <div className="relative">
+                  <EducationIllustration className="w-full h-auto max-w-md mx-auto" />
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Features Section */}
+      <div className="py-16 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <motion.h2 
+              className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              核心功能
+            </motion.h2>
+            <motion.p 
+              className="mt-4 max-w-2xl text-xl text-gray-600 dark:text-gray-300 mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              我们提供全方位的志愿填报解决方案，助您轻松应对高考志愿填报
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                title: '智能推荐',
+                description: '基于历年分数线和位次，智能推荐适合您的院校和专业',
+                icon: '🎯',
+              },
+              {
+                title: '数据精准',
+                description: '整合全国高校最新招生数据，确保信息准确可靠',
+                icon: '📊',
+              },
+              {
+                title: '职业规划',
+                description: '结合职业发展趋势，为您提供专业的职业规划建议',
+                icon: '🎓',
+              },
+              {
+                title: '模拟填报',
+                description: '提前模拟志愿填报，熟悉流程，避免失误',
+                icon: '📝',
+              },
+              {
+                title: '院校对比',
+                description: '多维度对比不同院校，助您做出最佳选择',
+                icon: '⚖️',
+              },
+              {
+                title: '专业解析',
+                description: '详细解析各专业课程设置、就业前景等信息',
+                icon: '🔍',
+              },
+            ].map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 * (index % 3) }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="w-12 h-12 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-2xl mb-4">
+                  {feature.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.h2 
+            className="text-3xl font-extrabold mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            立即开始您的高考志愿填报之旅
+          </motion.h2>
+          <motion.p 
+            className="text-xl mb-8 max-w-3xl mx-auto opacity-90"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            加入数万考生共同选择的智能志愿填报平台，让您的高考志愿填报更轻松、更科学、更精准。
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <AnimatedButton 
+              size="lg" 
+              className="bg-primary-200 text-white hover:bg-primary-700"
+            >
+              免费注册
+            </AnimatedButton>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-white dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+          <div className="border-t border-gray-200 dark:border-gray-700 pt-8">
+            <p className="text-center text-base text-gray-500 dark:text-gray-400">
+              &copy; {new Date().getFullYear()} 高考志愿填报系统. 保留所有权利。
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default HomePage;
