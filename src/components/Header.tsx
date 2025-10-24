@@ -11,8 +11,8 @@ const navItems = [
   { path: '/', name: '首页' },
   { path: '/recommend', name: '智能推荐' },
   { path: '/mock-fill', name: '模拟填报' },
+  { path: '/majors', name: '专业测评' },
   { path: '/colleges', name: '院校库' },
-  { path: '/majors', name: '专业库' },
 ];
 
 export default function AppHeader() {
@@ -58,16 +58,7 @@ export default function AppHeader() {
             </nav>
           </div>
           
-          <div className="flex items-center space-x-4">
-            <div className="hidden md:block">
-              <Input.Search 
-                placeholder="搜索院校/专业" 
-                onSearch={(value) => value && navigate(`/search?q=${value}`)}
-                className="w-64"
-                allowClear
-              />
-            </div>
-            
+          <div className="flex items-center space-x-4">        
             <AnimatedButton 
               variant="ghost" 
               size="sm" 
@@ -78,20 +69,13 @@ export default function AppHeader() {
               {theme === 'dark' ? '☀️' : '🌙'}
             </AnimatedButton>
             
-            <div className="hidden md:flex items-center space-x-2">
-              <AnimatedButton 
-                variant="outline" 
-                size="sm" 
-                onClick={() => navigate('/login')}
-              >
-                登录
-              </AnimatedButton>
-              <AnimatedButton 
-                size="sm" 
-                onClick={() => navigate('/register')}
-              >
-                注册
-              </AnimatedButton>
+            <div className="hidden md:flex items-center space-x-3">
+              <div className="flex items-center space-x-2 hover:bg-gray-100 dark:hover:bg-gray-700/50 rounded-full p-1 pr-3 transition-colors duration-200">
+                <div className="w-7 h-7 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center text-gray-600 dark:text-gray-300 text-xs font-normal">
+                  金
+                </div>
+                <span className="text-sm text-gray-600 dark:text-gray-300">金榜题名</span>
+              </div>
             </div>
             
             {/* Mobile menu button */}
@@ -141,22 +125,14 @@ export default function AppHeader() {
               {item.name}
             </Link>
           ))}
-          <div className="px-3 py-2">
-            <AnimatedButton 
-              variant="outline" 
-              size="sm" 
-              className="w-full justify-center mb-2"
-              onClick={() => navigate('/login')}
-            >
-              登录
-            </AnimatedButton>
-            <AnimatedButton 
-              size="sm" 
-              className="w-full justify-center"
-              onClick={() => navigate('/register')}
-            >
-              注册
-            </AnimatedButton>
+          <div className="px-3 py-3 flex items-center space-x-3 border-t border-gray-100 dark:border-gray-700/50 mt-2">
+            <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center text-gray-600 dark:text-gray-300 text-sm font-normal flex-shrink-0">
+              金
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm text-gray-600 dark:text-gray-300 truncate">金榜题名</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 truncate">已登录</p>
+            </div>
           </div>
         </div>
       </div>

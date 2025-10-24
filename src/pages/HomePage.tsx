@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Select, Input, Button, Modal } from 'antd';
+import { SearchOutlined, HistoryOutlined, ProfileOutlined, EditOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 import AnimatedButton from '../components/ui/AnimatedButton';
 import EducationIllustration from '../components/illustrations/EducationIllustration';
-import { useTheme } from '../theme/ThemeProvider';
+
+// Mock provinces data
+const provinces = [
+  '北京', '上海', '广东', '江苏', '浙江', '四川', '湖北', '湖南',
+  '河南', '山东', '河北', '陕西', '福建', '安徽', '辽宁', '江西',
+  '重庆', '黑龙江', '广西', '山西', '云南', '吉林', '贵州', '甘肃',
+  '海南', '青海', '宁夏', '西藏', '新疆', '内蒙古', '天津'
+];
 
 const HomePage: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
-  
+  const navigate = useNavigate();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedProvince, setSelectedProvince] = useState<string>('');
+  const [score, setScore] = useState<string>('');
+
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -21,6 +34,37 @@ const HomePage: React.FC = () => {
   const item = {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
+  const handleGenerate = () => {
+    if (!selectedProvince || !score) {
+      return;
+    }
+    navigate('/recommend', { 
+      state: { 
+        province: selectedProvince,
+        score: score
+      }
+    });
+  };
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    if (selectedProvince && score) {
+      navigate('/recommend', { 
+        state: { 
+          province: selectedProvince,
+          score: score
+        }
+      });
+    }
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
 
   return (
@@ -66,16 +110,22 @@ const HomePage: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <AnimatedButton size="lg" className="w-full sm:w-auto">
-                  开始使用
-                </AnimatedButton>
                 <AnimatedButton 
-                  variant="outline" 
                   size="lg" 
                   className="w-full sm:w-auto"
+                  onClick={showModal}
                 >
-                  了解更多
+                  开始使用
                 </AnimatedButton>
+                <a href="/about">
+                  <AnimatedButton 
+                    variant="outline" 
+                    size="lg" 
+                    className="w-full sm:w-auto"
+                  >
+                    了解更多
+                  </AnimatedButton>
+                </a>
               </motion.div>
               
               <motion.div 
@@ -241,16 +291,58 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-white dark:bg-gray-800">
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-          <div className="border-t border-gray-200 dark:border-gray-700 pt-8">
-            <p className="text-center text-base text-gray-500 dark:text-gray-400">
-              &copy; {new Date().getFullYear()} 高考志愿填报系统. 保留所有权利。
-            </p>
+      {/* Recommendation Modal */}
+      <Modal 
+        title="智能推荐大学" 
+        open={isModalVisible} 
+        onOk={handleOk} 
+        onCancel={handleCancel}
+        okText="开始智能推荐"
+        cancelText="取消"
+        okButtonProps={{
+          icon: <SearchOutlined />,
+          disabled: !selectedProvince || !score,
+          className: 'bg-blue-600 hover:bg-blue-700 border-none'
+        }}
+        width={600}
+      >
+        <div className="space-y-6 py-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              选择省份
+            </label>
+            <Select
+              placeholder="请选择省份"
+              className="w-full"
+              size="large"
+              value={selectedProvince || undefined}
+              onChange={setSelectedProvince}
+              showSearch
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+              }
+              options={provinces.map(province => ({
+                value: province,
+                label: province
+              }))}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              高考分数
+            </label>
+            <Input
+              type="number"
+              placeholder="请输入高考分数"
+              size="large"
+              value={score}
+              onChange={(e) => setScore(e.target.value)}
+              className="w-full"
+            />
           </div>
         </div>
-      </footer>
+      </Modal>
     </div>
   );
 };

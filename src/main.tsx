@@ -15,6 +15,7 @@ const RecommendPage = React.lazy(() => import('./pages/RecommendPage'));
 const MockFillPage = React.lazy(() => import('./pages/MockFillPage'));
 const CollegesPage = React.lazy(() => import('./pages/CollegesPage'));
 const MajorsPage = React.lazy(() => import('./pages/MajorsPage'));
+const AssessmentRecommendations = React.lazy(() => import('./pages/AssessmentRecommendations'));
 
 // Add global styles for animations
 const style = document.createElement('style');
@@ -96,6 +97,7 @@ const App = () => (
                 <Route path="/mock-fill" element={<MockFillPage />} />
                 <Route path="/colleges" element={<CollegesPage />} />
                 <Route path="/majors" element={<MajorsPage />} />
+                <Route path="/assessment-recommendations" element={<AssessmentRecommendations />} />
                 {/* Add more routes here as needed */}
               </Routes>
             </Suspense>
