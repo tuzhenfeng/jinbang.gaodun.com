@@ -31,7 +31,7 @@ export default function AppHeader() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
-              高考志愿智能系统
+              高小报
             </Link>
             <nav className="hidden md:ml-10 md:flex md:space-x-1">
               {navItems.map((item) => (

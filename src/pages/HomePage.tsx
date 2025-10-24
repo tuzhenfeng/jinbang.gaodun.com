@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Select, Input, Button, Modal } from 'antd';
-import { SearchOutlined, HistoryOutlined, ProfileOutlined, EditOutlined } from '@ant-design/icons';
+import { Select, Input, Modal } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import AnimatedButton from '../components/ui/AnimatedButton';
 import EducationIllustration from '../components/illustrations/EducationIllustration';
@@ -116,7 +116,7 @@ const HomePage: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                智能高考志愿
+                高考志愿智能
                 <span className="block bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
                   填报系统
                 </span>

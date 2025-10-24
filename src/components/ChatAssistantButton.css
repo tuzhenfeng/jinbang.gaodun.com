@@ -1,0 +1,17 @@
+.chat-assistant-button {
+  /* Base styles */
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  z-index: 50;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}

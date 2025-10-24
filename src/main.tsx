@@ -5,6 +5,7 @@ import { ConfigProvider, Spin } from 'antd';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './theme/ThemeProvider';
 import Header from './components/Header';
+import ChatAssistantButton from './components/ChatAssistantButton';
 import './index.css';
 import 'antd/dist/reset.css';
 
@@ -16,6 +17,7 @@ const MockFillPage = React.lazy(() => import('./pages/MockFillPage'));
 const CollegesPage = React.lazy(() => import('./pages/CollegesPage'));
 const MajorsPage = React.lazy(() => import('./pages/MajorsPage'));
 const AssessmentRecommendations = React.lazy(() => import('./pages/AssessmentRecommendations'));
+const VolcanoDemo = React.lazy(() => import('./pages/VolcanoDemo'));
 
 // Add global styles for animations
 const style = document.createElement('style');
@@ -88,6 +90,7 @@ const App = () => (
       <Router>
         <div className="min-h-screen flex flex-col bg-background-light dark:bg-background-dark">
           <Header />
+          <ChatAssistantButton />
           <main className="flex-grow">
             <Suspense fallback={<Loading />}>
               <Routes>
@@ -98,6 +101,7 @@ const App = () => (
                 <Route path="/colleges" element={<CollegesPage />} />
                 <Route path="/majors" element={<MajorsPage />} />
                 <Route path="/assessment-recommendations" element={<AssessmentRecommendations />} />
+                <Route path="/volcano-demo" element={<VolcanoDemo />} />
                 {/* Add more routes here as needed */}
               </Routes>
             </Suspense>
