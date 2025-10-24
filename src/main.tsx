@@ -111,16 +111,16 @@ const App = () => (
                   © {new Date().getFullYear()} 高考志愿智能系统. 保留所有权利。
                 </div>
                 <div className="flex space-x-6 mt-4 md:mt-0">
-                  <a href="/about" className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
+                  <a href="" className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
                     关于我们
                   </a>
-                  <a href="/terms" className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
+                  <a href="" className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
                     服务条款
                   </a>
-                  <a href="/privacy" className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
+                  <a href="" className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
                     隐私政策
                   </a>
-                  <a href="/contact" className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
+                  <a href="" className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300">
                     联系我们
                   </a>
                 </div>
