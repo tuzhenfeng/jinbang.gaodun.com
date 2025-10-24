@@ -14,11 +14,23 @@ const provinces = [
   '海南', '青海', '宁夏', '西藏', '新疆', '内蒙古', '天津'
 ];
 
+const subjects = [
+  { value: 'physics', label: '物理' },
+  { value: 'chemistry', label: '化学' },
+  { value: 'biology', label: '生物' },
+  { value: 'politics', label: '政治' },
+  { value: 'history', label: '历史' },
+  { value: 'geography', label: '地理' },
+  { value: 'technology', label: '技术' },
+];
+
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedProvince, setSelectedProvince] = useState<string>('');
   const [score, setScore] = useState<string>('');
+  const [percentile, setPercentile] = useState<string>('');
+  const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
 
   const container = {
     hidden: { opacity: 0 },
@@ -37,14 +49,27 @@ const HomePage: React.FC = () => {
   };
 
   const handleGenerate = () => {
-    if (!selectedProvince || !score) {
+    if (!selectedProvince || !score || selectedSubjects.length !== 3) {
       return;
     }
     navigate('/recommend', { 
       state: { 
         province: selectedProvince,
-        score: score
+        score: score,
+        percentile: percentile,
+        subjects: selectedSubjects
       }
+    });
+  };
+  
+  const toggleSubject = (subject: string) => {
+    setSelectedSubjects(prev => {
+      if (prev.includes(subject)) {
+        return prev.filter(s => s !== subject);
+      } else if (prev.length < 3) {
+        return [...prev, subject];
+      }
+      return prev;
     });
   };
 
@@ -53,11 +78,13 @@ const HomePage: React.FC = () => {
   };
 
   const handleOk = () => {
-    if (selectedProvince && score) {
+    if (selectedProvince && score && selectedSubjects.length === 3) {
       navigate('/recommend', { 
         state: { 
           province: selectedProvince,
-          score: score
+          score: score,
+          percentile: percentile,
+          subjects: selectedSubjects
         }
       });
     }
@@ -301,7 +328,7 @@ const HomePage: React.FC = () => {
         cancelText="取消"
         okButtonProps={{
           icon: <SearchOutlined />,
-          disabled: !selectedProvince || !score,
+          disabled: !selectedProvince || !score || !percentile || selectedSubjects.length !== 3,
           className: 'bg-blue-600 hover:bg-blue-700 border-none'
         }}
         width={600}
@@ -330,16 +357,57 @@ const HomePage: React.FC = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              高考分数
+              选科（7选3）
+              <span className="ml-1 text-xs text-gray-500">
+                {selectedSubjects.length}/3
+              </span>
             </label>
-            <Input
-              type="number"
-              placeholder="请输入高考分数"
-              size="large"
-              value={score}
-              onChange={(e) => setScore(e.target.value)}
-              className="w-full"
-            />
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {subjects.map((subject) => (
+                <button
+                  key={subject.value}
+                  type="button"
+                  onClick={() => toggleSubject(subject.value)}
+                  className={`px-4 py-2 text-sm rounded-md transition-colors duration-200 ${
+                    selectedSubjects.includes(subject.value)
+                      ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 border border-blue-300 dark:border-blue-700'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600'
+                  }`}
+                  disabled={!selectedSubjects.includes(subject.value) && selectedSubjects.length >= 3}
+                >
+                  {subject.label}
+                </button>
+              ))}
+            </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                高考分数 <span className="text-red-500">*</span>
+              </label>
+              <Input
+                type="number"
+                placeholder="请输入高考分数"
+                size="large"
+                value={score}
+                onChange={(e) => setScore(e.target.value)}
+                className="w-full"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                位次 <span className="text-red-500">*</span>
+                <span className="ml-1 text-xs text-gray-500">(全省排名)</span>
+              </label>
+              <Input
+                type="number"
+                placeholder="请输入位次"
+                size="large"
+                value={percentile}
+                onChange={(e) => setPercentile(e.target.value)}
+                className="w-full"
+              />
+            </div>
+          </div>
           </div>
         </div>
       </Modal>

@@ -1,6 +1,3 @@
-
-import React from 'react';
-import { Input } from 'antd';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import AnimatedButton from './ui/AnimatedButton';
 import { useTheme } from '../theme/ThemeProvider';
@@ -10,8 +7,8 @@ import classNames from 'classnames';
 const navItems = [
   { path: '/', name: '首页' },
   { path: '/recommend', name: '智能推荐' },
-  { path: '/mock-fill', name: '模拟填报' },
   { path: '/majors', name: '专业测评' },
+  { path: '/mock-fill', name: '模拟填报' },
   { path: '/colleges', name: '院校库' },
 ];
 
